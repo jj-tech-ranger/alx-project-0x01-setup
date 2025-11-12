@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import Header from '@/components/layout/Header';
-import UserCard from '@/components/common/UserCard';
-import UserModal from '@/components/common/UserModal';
-import { UserProps } from '@/interfaces';
+import { useState } from "react";
+import Header from "@/components/layout/Header";
+import UserCard from "@/components/common/UserCard";
+import UserModal from "@/components/common/UserModal";
+import { UserProps } from "@/interfaces";
 
 interface UsersPageProps {
-  users: UserProps[];
+  posts: UserProps[];
 }
 
-const Users: React.FC<UsersPageProps> = ({ users }) => {
+const Users: React.FC<UsersPageProps> = ({ posts }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -25,7 +25,7 @@ const Users: React.FC<UsersPageProps> = ({ users }) => {
           </button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {users.map((user) => (
+          {posts.map((user) => (
             <UserCard key={user.id} {...user} />
           ))}
         </div>
@@ -35,15 +35,15 @@ const Users: React.FC<UsersPageProps> = ({ users }) => {
   );
 };
 
-export const getStaticProps = async () => {
-  const response = await fetch('https://jsonplaceholder.typicode.com/users');
-  const users = await response.json();
+export async function getStaticProps() {
+  const response = await fetch("https://jsonplaceholder.typicode.com/users")
+  const posts = await response.json()
 
   return {
     props: {
-      users,
-    },
-  };
-};
+      posts
+    }
+  }
+}
 
 export default Users;
