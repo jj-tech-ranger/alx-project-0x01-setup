@@ -30,9 +30,10 @@ export interface UserProps {
 }
 
 export interface PostData {
+  userId: number;
+  id?: number;
   title: string;
   body: string;
-  userId: number;
 }
 
 export interface UserData {
@@ -42,8 +43,8 @@ export interface UserData {
 }
 
 export interface PostModalProps {
-  isOpen: boolean;
   onClose: () => void;
+  onSubmit: (post: PostData) => void;
 }
 
 export interface UserModalProps {
